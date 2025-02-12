@@ -6,6 +6,7 @@ npm install axios
 npm install react-toastify
 npm install mongodb
 npm install mongoose
+https://medium.com/lets-code-future/12-awesome-next-js-libraries-to-supercharge-your-development-38632f6ae6f3
 
 First, run the development server:
 
