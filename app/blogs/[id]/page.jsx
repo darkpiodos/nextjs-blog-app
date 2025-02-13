@@ -4,23 +4,36 @@ import Footer from "@/Components/Footer";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React, { use, useEffect, useState } from "react";
 
-const page = ({ params }) => {
-  const { id } = use(params);
+const Page = () => {
+  const params = useParams(); // Get the params as a promise
+  const [id, setId] = useState(null);
   const [data, setData] = useState(null);
 
-  const fetchBlogData = async () => {
-    const response = await axios.get("/api/blog", {
-      params: {
-        id: params.id,
-      },
-    });
-    setData(response.data);
+  const fetchBlogData = async (resolvedId) => {
+    try {
+      const response = await axios.get(`/api/blog`, {
+        params: {
+          id: resolvedId,
+        },
+      });
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching blog data:", error);
+    }
   };
+
   useEffect(() => {
-    fetchBlogData();
-  }, []);
+    const fetchParams = async () => {
+      const resolvedParams = await params; // Unwrap the params promise
+      setId(resolvedParams.id); // Set the ID state
+      fetchBlogData(resolvedParams.id); // Fetch blog data with the resolved ID
+    };
+
+    fetchParams();
+  }, [params]);
 
   return data ? (
     <>
@@ -62,60 +75,9 @@ const page = ({ params }) => {
           alt="this is the blog image"
           width={1280}
           height={720}
-          className="border-4 border-white "
+          className="border-4 border-white"
         />
-        <h1 className="my-8 text-[26px] font-semibold">Introduction</h1>
         <p>{data.description}</p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 1: Self-Reflection and Goal Setting
-        </h3>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 2: Self-Reflection and Goal Setting
-        </h3>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>{" "}
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 3: Self-Reflection and Goal Setting
-        </h3>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">Conclusion: </h3>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
-        <p className="my-3">
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book.
-        </p>
         <div className="my-24">
           <p className="text-black font-semibold my-4">
             Share this article on social media
@@ -139,4 +101,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;
