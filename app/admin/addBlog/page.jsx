@@ -4,14 +4,14 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
+import "../../../app/globals.css";
 const Page = () => {
   const [image, setImage] = useState(null); // Initialize with null for consistency
 
   const [data, setData] = useState({
     title: "",
     description: "",
-    category: "Startup",
+    category: "Graphic Design",
     author: "Darwin Piodos",
     authorImg: "/author_icon.png",
   });
@@ -40,7 +40,7 @@ const Page = () => {
       setData({
         title: "",
         description: "",
-        category: "Startup",
+        category: "Graphic Design",
         author: "Darwin Piodos",
         authorImg: "/author_icon.png",
       });
@@ -95,11 +95,17 @@ const Page = () => {
           name="category"
           onChange={onChangeHandler}
           value={data.category}
-          className="w-40 mt-4 px-4 py-3 border text-gray-500"
+          className="w-50 mt-4 px-4 py-3 border rounded-sm"
         >
-          <option value="Startup">Startup</option>
-          <option value="Technology">Technology</option>
-          <option value="Lifestyle">Lifestyle</option>
+          <option value="Graphic Design" className="option-hover rounded-none">
+            Graphic Design
+          </option>
+          <option className="option-hover" value="UI/UX Design">
+            UI/UX Design
+          </option>
+          <option className="option-hover" value="Web Development">
+            Web Development
+          </option>
         </select>
         <br />
         <button type="submit" className="mt-8 w-40 h-12 bg-black text-white">

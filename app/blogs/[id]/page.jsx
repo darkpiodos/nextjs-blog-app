@@ -5,8 +5,11 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
+const iconStyle =
+  "bg-white text-black w-10 h-10 rounded-full flex items-center justify-center";
 const Page = () => {
   const params = useParams(); // Get the params as a promise
   const [id, setId] = useState(null);
@@ -27,9 +30,9 @@ const Page = () => {
 
   useEffect(() => {
     const fetchParams = async () => {
-      const resolvedParams = await params; // Unwrap the params promise
-      setId(resolvedParams.id); // Set the ID state
-      fetchBlogData(resolvedParams.id); // Fetch blog data with the resolved ID
+      const resolvedParams = await params;
+      setId(resolvedParams.id);
+      fetchBlogData(resolvedParams.id);
     };
 
     fetchParams();
@@ -47,9 +50,6 @@ const Page = () => {
               className="w-[130px] sm:w-auto"
             />
           </Link>
-          <button className="flex items-center gap-2 front-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]">
-            Get started <Image src={assets.arrow} alt="this is an arrow" />
-          </button>
         </div>
 
         <div className="text-center my-24">
@@ -58,7 +58,7 @@ const Page = () => {
           </h1>
 
           <Image
-            className="mx-auto mt-6 border border-white rounded-full"
+            className="mx-auto mt-10 border border-white rounded-full"
             src={data.authorImg}
             alt="this is an author image"
             width={60}
@@ -77,19 +77,45 @@ const Page = () => {
           height={720}
           className="border-4 border-white"
         />
-        <p>{data.description}</p>
+        <p className="mt-8">{data.description}</p>
         <div className="my-24">
           <p className="text-black font-semibold my-4">
             Share this article on social media
           </p>
           <div className="flex">
-            <Image src={assets.facebook_icon} width={50} alt="facebook icon" />
-            <Image src={assets.twitter_icon} width={50} alt="twitter icon" />
-            <Image
-              src={assets.googleplus_icon}
-              width={50}
-              alt="google plus icon"
-            />
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={iconStyle}
+            >
+              <FaFacebookF />
+            </a>
+
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={iconStyle}
+            >
+              <FaTwitter />
+            </a>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={iconStyle}
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={iconStyle}
+            >
+              <FaYoutube />
+            </a>
           </div>
         </div>
       </div>

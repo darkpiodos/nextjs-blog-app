@@ -5,6 +5,7 @@ const { NextResponse } = require("next/server");
 const fs = require("fs");
 // Ensure database is connected for every request
 // Api End point to get all blogs
+
 export async function GET(request) {
   const blogId = request.nextUrl.searchParams.get("id");
   if (blogId) {

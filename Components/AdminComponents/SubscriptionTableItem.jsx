@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTimes } from "react-icons/fa";
 
 const SubscriptionTableItem = ({ email, mongoId, date, deleteEmail }) => {
   const emailDate = new Date(date);
@@ -12,12 +13,14 @@ const SubscriptionTableItem = ({ email, mongoId, date, deleteEmail }) => {
       </th>
       <td className="px-6 py-4">{emailDate.toDateString()}</td>
       <td
-        className="px-6 py-4 cursor-pointer"
+        className="px-6 py-4 cursor-pointer  flex items-center space-x-2 "
         onClick={() => {
           deleteEmail(mongoId);
         }}
       >
-        X
+        <span className="bg-neutral-100 p-3 rounded-full hover:bg-black hover:text-white">
+          <FaTimes />
+        </span>
       </td>
     </tr>
   );

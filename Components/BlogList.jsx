@@ -14,46 +14,51 @@ const BlogList = () => {
     fetchBlogs();
   }, []);
   return (
-    <div>
-      <div className="flex justify-center gap-6 my-10">
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex justify-center gap-6 my-10 ">
         <button
           onClick={() => setMenu("All")}
           className={
-            menu === "All" ? "bg-black text-white py-1 px-4 rounded-sm" : ""
+            menu === "All"
+              ? "bg-black text-white py-1 px-4 rounded-sm"
+              : "hover:bg-neutral-200 py-1 px-4 rounded-sm"
           }
         >
           All
         </button>
         <button
           className={
-            menu === "Technology"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : ""
+            menu === "Graphic Design"
+              ? "bg-black text-white py-1 px-4 rounded-sm "
+              : "hover:bg-neutral-200 py-1 px-4 rounded-sm"
           }
-          onClick={() => setMenu("Technology")}
+          onClick={() => setMenu("Graphic Design")}
         >
-          Technology
+          Graphic Design
         </button>
         <button
           className={
-            menu === "Startup" ? "bg-black text-white py-1 px-4 rounded-sm" : ""
+            menu === "UI/UX Design"
+              ? "bg-black text-white py-1 px-4 rounded-sm"
+              : "hover:bg-neutral-200 py-1 px-4 rounded-sm"
           }
-          onClick={() => setMenu("Startup")}
+          onClick={() => setMenu("UI/UX Design")}
         >
-          Startup
+          UI/UX Design
         </button>
         <button
           className={
-            menu === "Lifestyle"
+            menu === "Web Development"
               ? "bg-black text-white py-1 px-4 rounded-sm"
-              : ""
+              : "hover:bg-neutral-200 py-1 px-4 rounded-sm"
           }
-          onClick={() => setMenu("Lifestyle")}
+          onClick={() => setMenu("Web Development")}
         >
-          Lifestyle
+          Web Development
         </button>
       </div>
-      <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
+      <div className="gap-6 gap-y-8 mb-16 xl:mx-24 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid  max-w-7xl  mx-auto">
+        {" "}
         {blogs
           .filter((item) => (menu === "All" ? true : item.category === menu))
           .map((item, index) => {

@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Global styles */
+body {
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -9,4 +14,8 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+.option-hover:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
